@@ -703,6 +703,7 @@ Did you mean this?
 #35 C:\\Users\\iss5i\\Documents\\FRS-System\\frs-system\\artisan(16): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
 #36 {main}
 "} 
+<<<<<<< HEAD
 [2025-09-29 06:13:44] local.ERROR: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it (Connection: mysql, SQL: select exists (select 1 from information_schema.tables where table_schema = schema() and table_name = 'migrations' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED')) as `exists`) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 2002): SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it (Connection: mysql, SQL: select exists (select 1 from information_schema.tables where table_schema = schema() and table_name = 'migrations' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED')) as `exists`) at C:\\Users\\iss5i\\Documents\\FRS-System\\frs-system\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:824)
 [stacktrace]
 #0 C:\\Users\\iss5i\\Documents\\FRS-System\\frs-system\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(978): Illuminate\\Database\\Connection->runQueryCallback('select exists (...', Array, Object(Closure))
@@ -2692,3 +2693,5 @@ Did you mean this?
 #61 C:\\Users\\iss5i\\Documents\\FRS-System\\frs-system\\artisan(16): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
 #62 {main}
 "} 
+=======
+>>>>>>> 0d7bf8f441156af5093dcf0f311cdc73d7d0850c
