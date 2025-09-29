@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Daftar Mata Kuliah')
+
 @section('content')
 <div class="container">
     <h1>Daftar Mata Kuliah</h1>
@@ -7,8 +9,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Kode MK</th>
-                <th>Nama MK</th>
+                <th>Nama Mata Kuliah</th>
                 <th>SKS</th>
                 <th>Semester</th>
                 <th>Jenis</th>
@@ -16,17 +17,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $matkul)
+            @foreach ($matakuliah as $matkul)
             <tr>
-                <td>{{ $matkul->kode_mk }}</td>
                 <td>{{ $matkul->nama_mk }}</td>
                 <td>{{ $matkul->sks }}</td>
                 <td>{{ $matkul->semester }}</td>
                 <td>{{ ucfirst($matkul->jenis_mk) }}</td>
                 <td>
-                    <a href="{{ route('matakuliah.show', $matkul->id) }}" class="btn btn-info btn-sm">Detail</a>
-                    <a href="{{ route('matakuliah.edit', $matkul->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('matakuliah.destroy', $matkul->id) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('matakuliah.show', $matkul) }}" class="btn btn-info btn-sm">Detail</a>
+                    <a href="{{ route('matakuliah.edit', $matkul) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('matakuliah.destroy', $matkul) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
