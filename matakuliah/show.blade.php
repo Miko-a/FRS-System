@@ -6,23 +6,23 @@
     <table class="table">
         <tr>
             <th>Kode MK</th>
-            <td>{{ $matakuliah->kode_mk }}</td>
+            <td>{{ $matkul->kode_mk }}</td>
         </tr>
         <tr>
             <th>Nama MK</th>
-            <td>{{ $matakuliah->nama_mk }}</td>
+            <td>{{ $matkul->nama_mk }}</td>
         </tr>
         <tr>
             <th>SKS</th>
-            <td>{{ $matakuliah->sks }}</td>
+            <td>{{ $matkul->sks }}</td>
         </tr>
         <tr>
             <th>Semester</th>
-            <td>{{ $matakuliah->semester }}</td>
+            <td>{{ $matkul->semester }}</td>
         </tr>
         <tr>
             <th>Jenis MK</th>
-            <td>{{ ucfirst($matakuliah->jenis_mk) }}</td>
+            <td>{{ ucfirst($matkul->jenis_mk) }}</td>
         </tr>
     </table>
     <a href="{{ route('matakuliah.index') }}" class="btn btn-secondary">Kembali</a>
