@@ -12,8 +12,9 @@ class MatakuliahController extends Controller
      */
     public function index()
     {
-        $data = Matakuliah::all();
-        return view('matakuliah.index', compact('data'));
+        $matakuliah = Matakuliah::all();
+        // dd($matakuliah);
+        return view('matakuliah.index', compact('matakuliah'));
     }
 
     /**
@@ -46,7 +47,7 @@ class MatakuliahController extends Controller
      */
     public function show(string $id)
     {
-        $matkul = Matakuliah::findOeFail($id);
+        $matkul = Matakuliah::findOrFail($id);
         return view('matakuliah.show', compact('matkul'));
     }
 
