@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
-class Login extends Model
+class Login extends Model implements AuthenticatableContract
 {
+    use Authenticatable;
+
     protected $table = 'login';
     protected $primaryKey = 'login_id';
     public $incrementing = true;
