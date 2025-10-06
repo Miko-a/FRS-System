@@ -15,4 +15,9 @@ class Login extends Model implements AuthenticatableContract
     public $incrementing = true;
     protected $keyType = 'integer';
     protected $fillable = ['email', 'password','role'];
+
+
+    public function mahasiswa(){
+        return $this->hasOne(Mahasiswa::class, 'login_id');
+    }
 }

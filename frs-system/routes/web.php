@@ -31,6 +31,4 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Untuk matkul -sementara tes CRUD, success-
 Route::resource('matakuliah', MatakuliahController::class);
-
