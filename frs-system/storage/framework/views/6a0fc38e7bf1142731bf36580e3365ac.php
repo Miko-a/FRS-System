@@ -7,8 +7,8 @@
 <body class="h-full">
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Logo" class="mx-auto h-10 w-auto" />
-        <h2 class="mt-10 text-center text-2xl font-bold tracking-tight text-white">Selamat datang di MyFRS ITS</h2>
+        <img src="<?php echo e(asset('images/logo.png')); ?>" alt="Logo" class="mx-auto h-15 w-auto" />
+        <h2 class="mt-10 text-center text-2xl font-bold tracking-tight text-white">Selamat datang di ITS FRS</h2>
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -25,7 +25,8 @@
                 <label for="email" class="block text-sm font-medium text-gray-100">Email address</label>
                 <div class="mt-2">
                     <input id="email" type="email" name="email" required autocomplete="email"
-                           class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm" />
+                           class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm"  oninvalid="this.setCustomValidity('Silakan isi email Anda terlebih dahulu!')"
+       oninput="this.setCustomValidity('')" />
                 </div>
             </div>
 
@@ -38,7 +39,8 @@
                 </div>
                 <div class="mt-2">
                     <input id="password" type="password" name="password" required autocomplete="current-password"
-                           class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm" />
+                           class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm" oninvalid="this.setCustomValidity('Silakan isi password Anda terlebih dahulu!')"
+       oninput="this.setCustomValidity('')"/>
                 </div>
             </div>
 
@@ -52,5 +54,4 @@
     </div>
 </div>
 </body>
-</html>
-<?php /**PATH C:\Users\iss5i\Documents\FRS-System\frs-system\resources\views/auth/login.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\Users\iss5i\Documents\FRS-System\frs-system\resources\views/auth/login.blade.php ENDPATH**/ ?>

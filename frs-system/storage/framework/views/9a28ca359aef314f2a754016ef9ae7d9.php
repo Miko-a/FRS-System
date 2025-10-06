@@ -38,7 +38,7 @@
                 <td><?php echo e($matkul->semester); ?></td>
                 <td><?php echo e(ucfirst($matkul->jenis_mk)); ?></td>
                 <td>
-                    <!-- Pastikan parameter yang dikirim adalah model atau primary key -->
+                    
                     <a href="<?php echo e(route('matakuliah.show', $matkul)); ?>" class="btn btn-info btn-sm">Detail</a>
                     <a href="<?php echo e(route('matakuliah.edit', $matkul)); ?>" class="btn btn-warning btn-sm">Edit</a>
                     <form action="<?php echo e(route('matakuliah.destroy', $matkul)); ?>" method="POST" style="display:inline;">
@@ -52,4 +52,5 @@
         </tbody>
     </table>
 </div>
-<?php $__env->stopSection(); ?><?php /**PATH C:\Users\iss5i\Documents\FRS-System\frs-system\resources\views/matakuliah/index.blade.php ENDPATH**/ ?>
+<?php $__env->stopSection(); ?>
+<?php /**PATH C:\Users\iss5i\Documents\FRS-System\frs-system\resources\views/matakuliah/index.blade.php ENDPATH**/ ?>

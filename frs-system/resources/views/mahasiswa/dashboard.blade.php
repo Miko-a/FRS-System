@@ -17,7 +17,7 @@
 
         <div class="flex items-center">
           <div class="shrink-0">
-            <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Logo" class="size-8" />
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="size-10 w-auto h-10" />
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
@@ -30,8 +30,7 @@
 
         <div class="flex items-center space-x-4">
           <div class="flex items-center space-x-2">
-            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&w=256&h=256&q=80" 
-                 alt="User" class="size-8 rounded-full outline -outline-offset-1 outline-white/10" />
+            <img src="{{ asset('images/profile.png') }}" alt="User" class="size-9 rounded-full outline -outline-offset-1 outline-white/10" />
             <span class="text-gray-300 text-sm">{{ Auth::user()->name }}</span>
           </div>
 
@@ -49,14 +48,14 @@
 
   <header class="relative bg-gray-800 after:pointer-events-none after:absolute after:inset-x-0 after:inset-y-0 after:border-y after:border-white/10">
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold tracking-tight text-white">Dashboard Mahasiswa</h1>
+      <h1 class="text-3xl font-bold tracking-tight text-white">Dashboard</h1>
     </div>
   </header>
 
   <main>
     <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 text-white text-center">
-      <h2 class="text-5xl font-semibold mb-6">Selamat Datang, {{ Auth::user()->Mahasiswa->nama }}</h2>
-      <p class="text-gray-300 mb-10 text-lg">Ini adalah dashboard mahasiswa. Silakan pilih menu di bawah untuk mengelola mata kuliah dan aktivitas akademik Anda.</p>
+      <h2 class="text-5xl font-semibold mb-6">Halo, {{ Auth::user()->Mahasiswa->nama }}!</h2>
+      <p class="text-gray-300 mb-10 text-lg">Selamat datang di dashboard ITS FRS. Silakan pilih menu di bawah untuk mengelola mata kuliah dan aktivitas akademik Anda.</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
         
@@ -70,12 +69,13 @@
           </a>
         </div>
 
-        <div class="bg-gray-800/50 rounded-2xl p-8 shadow-lg flex flex-col items-center hover:shadow-green-500/30 transition">
+
+         <div class="bg-gray-800/50 rounded-2xl p-8 shadow-lg flex flex-col items-center hover:shadow-indigo-500/30 transition">
           <img src="https://cdn-icons-png.flaticon.com/512/2942/2942077.png" alt="Lihat Mata Kuliah" class="w-24 h-24 mb-4">
-          <h3 class="text-xl font-semibold mb-2 text-green-400">Lihat Mata Kuliah</h3>
+          <h3 class="text-xl font-semibold mb-2 text-indigo-400">Lihat Mata Kuliah</h3>
           <p class="text-gray-400 mb-6 text-sm text-center">Lihat daftar mata kuliah yang telah kamu ambil dan jadwalnya.</p>
-          <a href="{{ route('matakuliah.show', 1) }}" 
-             class="px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded-md transition">
+          <a href="{{ route('matakuliah.index') }}" 
+             class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md transition">
              Lihat Sekarang
           </a>
         </div>

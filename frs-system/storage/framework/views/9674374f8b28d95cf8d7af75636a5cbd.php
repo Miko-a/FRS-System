@@ -15,25 +15,25 @@
 
         <div class="flex items-center">
           <div class="shrink-0">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="size-10 w-auto h-10" />
+            <img src="<?php echo e(asset('images/logo.png')); ?>" alt="Logo" class="size-10 w-auto h-10" />
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <a href="#" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Dashboard</a>
-              <a href="{{ route('matakuliah.index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Ambil Mata Kuliah</a>
-               <a href="{{ route('matakuliah.index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Mata Kuliah</a>
+              <a href="<?php echo e(route('matakuliah.index')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Ambil Mata Kuliah</a>
+               <a href="<?php echo e(route('matakuliah.index')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Mata Kuliah</a>
             </div>
           </div>
         </div>
 
         <div class="flex items-center space-x-4">
           <div class="flex items-center space-x-2">
-            <img src="{{ asset('images/profile.png') }}" alt="User" class="size-9 rounded-full outline -outline-offset-1 outline-white/10" />
-            <span class="text-gray-300 text-sm">{{ Auth::user()->name }}</span>
+            <img src="<?php echo e(asset('images/profile.png')); ?>" alt="User" class="size-9 rounded-full outline -outline-offset-1 outline-white/10" />
+            <span class="text-gray-300 text-sm"><?php echo e(Auth::user()->name); ?></span>
           </div>
 
-          <form id="logout-form" action="{{ route('logout') }}" method="POST">
-            @csrf
+          <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST">
+            <?php echo csrf_field(); ?>
             <button type="submit" 
                     class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition">
               Logout
@@ -52,40 +52,39 @@
 
     <main class="max-w-3xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
         <div class="bg-gray-800/60 p-8 rounded-2xl shadow-xl">
-            <form action="{{ route('matakuliah.store') }}" method="POST" class="space-y-6">
-                @csrf
+            <form action="<?php echo e(route('matakuliah.store')); ?>" method="POST" class="space-y-6">
+                <?php echo csrf_field(); ?>
 
                 <div> 
                     <label for="kode_mk" class="block text-sm font-medium text-gray-300 mb-2">Kode MK</label> 
-                    <input type="text" id="kode_mk" name="kode_mk" required maxlength="5" 
-                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30" oninvalid="this.setCustomValidity('Silakan isi Kode MK terlebih dahulu!')" oninput="this.setCustomValidity('')" > 
+                    <input type="text" id="kode_mk" name="kode_mk" required maxlength="5" class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30" oninvalid="this.setCustomValidity('Silakan isi Kode MK terlebih dahulu!')" oninput="this.setCustomValidity('')" > 
                 </div>
 
                 <div>
                     <label for="nama_mk" class="block text-sm font-medium text-gray-300 mb-2">Nama MK</label>
                     <input type="text" id="nama_mk" name="nama_mk" required maxlength="100"
-                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi Nama MK terlebih dahulu!')"
+                        class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi Nama MK terlebih dahulu!')"
        oninput="this.setCustomValidity('')" >
                 </div>
 
                 <div>
                     <label for="sks" class="block text-sm font-medium text-gray-300 mb-2">SKS</label>
                     <input type="number" id="sks" name="sks" required min="1" max="10"
-                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi SKS terlebih dahulu!')"
+                        class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi SKS terlebih dahulu!')"
        oninput="this.setCustomValidity('')" >
                 </div>
 
                 <div>
                     <label for="semester" class="block text-sm font-medium text-gray-300 mb-2">Semester</label>
-                    <input type="number" id="semester" name="semester" required min="1" max="8"
-                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi Semester terlebih dahulu!')"
+                    <input type="number" id="semester" name="semester" min="1" max="8" required
+                        class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi Semester terlebih dahulu!')"
        oninput="this.setCustomValidity('')" >
                 </div>
 
                 <div>
                     <label for="jenis_mk" class="block text-sm font-medium text-gray-300 mb-2">Jenis MK</label>
                     <select id="jenis_mk" name="jenis_mk" required
-                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi Jenis MK terlebih dahulu!')"
+                        class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi Jenis MK terlebih dahulu!')"
        oninput="this.setCustomValidity('')" >
                         <option value="wajib">Wajib</option>
                         <option value="pilihan">Pilihan</option>
@@ -93,7 +92,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <a href="{{ route('matakuliah.index') }}"
+                    <a href="<?php echo e(route('matakuliah.index')); ?>"
                         class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md mr-3">Batal</a>
                     <button type="submit"
                         class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md">Simpan</button>
@@ -103,3 +102,4 @@
     </main>
 </body>
 </html>
+<?php /**PATH C:\Users\iss5i\Documents\FRS-System\frs-system\resources\views/matakuliah/create.blade.php ENDPATH**/ ?>
