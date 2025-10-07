@@ -20,4 +20,8 @@ class Login extends Model implements AuthenticatableContract
     public function mahasiswa(){
         return $this->hasOne(Mahasiswa::class, 'login_id');
     }
+
+    public function dosen() {
+        return $this->hasOne(Dosen::class, 'login_id');
+    }
 }
