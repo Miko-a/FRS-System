@@ -34,8 +34,10 @@
 
             <div class="flex items-center space-x-4">
             <div class="flex items-center space-x-2">
-                <img src="<?php echo e(asset('images/profile.png')); ?>" alt="User" class="size-9 rounded-full outline -outline-offset-1 outline-white/10" />
-                <span class="text-gray-300 text-sm"><?php echo e(Auth::user()->name); ?></span>
+                <a href="<?php echo e(route('dosen.profile')); ?>">
+                    <img src="<?php echo e(asset('images/profile.png')); ?>" alt="User" class="size-9 rounded-full outline -outline-offset-1 outline-white/10" />
+                    <span class="text-gray-300 text-sm"><?php echo e(Auth::user()->name); ?></span>
+                </a>
             </div>
 
             <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST">
