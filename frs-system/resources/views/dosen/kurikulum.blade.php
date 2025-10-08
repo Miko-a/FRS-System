@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kurikulum Dosen</title>
+    <title>Kurikulum Mata Kuliah</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -16,9 +16,11 @@
 
 
             <div class="flex items-center">
-            <div class="shrink-0">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="size-10 w-auto h-10" />
-            </div>
+                <div class="shrink-0">
+                    <a href="{{ route('dosen.dashboard') }}">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-auto h-10"/>
+                    </a>
+                </div>
             <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-4">
                     <a href="{{ route('dosen.dashboard') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Dashboard</a>
@@ -27,7 +29,7 @@
 
                     <a href="{{ route('dosen.ajuanUbahJadwal') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Perubahan Jadwal</a>
 
-                    <a href="#" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Kurikulum</a>
+                    <a href="{{ route ('dosen.kurikulum') }}" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Kurikulum</a>
                 </div>
             </div>
             </div>
@@ -54,7 +56,7 @@
 
     <header class="relative bg-gray-800 after:pointer-events-none after:absolute after:inset-x-0 after:inset-y-0 after:border-y after:border-white/10">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-white">Kurikulum Dosen</h1>
+        <h1 class="text-3xl font-bold tracking-tight text-white">Kurikulum Mata Kuliah</h1>
         </div>
     </header>
 
