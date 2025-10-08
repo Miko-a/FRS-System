@@ -15,13 +15,16 @@
 
         <div class="flex items-center">
           <div class="shrink-0">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="size-10 w-auto h-10" />
+            <a href="{{route ('admin.dashboard') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="size-10 w-auto h-10"/>
+            </a>
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
-              <a href="#" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Dashboard</a>
-              <a href="{{ route('matakuliah.index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Ambil Mata Kuliah</a>
-               <a href="{{ route('matakuliah.index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Mata Kuliah</a>
+            <a href="{{ route ('admin.dashboard')}}" aria-current="page" class="rounded-md px-3 py-2 text-sm font-medium text-white">Dashboard</a>
+            <a href="{{ route('matakuliah.index') }}" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Mata Kuliah</a>
+            <a href="{{ route('kelas.index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Kelas</a>
+            <a href="{{ route('user.index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List User</a>
             </div>
           </div>
         </div>
@@ -57,36 +60,49 @@
 
                 <div> 
                     <label for="kode_mk" class="block text-sm font-medium text-gray-300 mb-2">Kode MK</label> 
-                    <input type="text" id="kode_mk" name="kode_mk" required maxlength="5" 
-                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30" oninvalid="this.setCustomValidity('Silakan isi Kode MK terlebih dahulu!')" oninput="this.setCustomValidity('')" > 
+                    <input type="text" id="kode_mk" name="kode_mk" maxlength="5"  
+                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30" > 
+
+                    @error('kode_mk')
+                      <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div>
                     <label for="nama_mk" class="block text-sm font-medium text-gray-300 mb-2">Nama MK</label>
-                    <input type="text" id="nama_mk" name="nama_mk" required maxlength="100"
-                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi Nama MK terlebih dahulu!')"
-       oninput="this.setCustomValidity('')" >
+                    <input type="text" id="nama_mk" name="nama_mk" maxlength="100"
+                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30">
+
+                    @error('nama_mk')
+                      <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div>
                     <label for="sks" class="block text-sm font-medium text-gray-300 mb-2">SKS</label>
-                    <input type="number" id="sks" name="sks" required min="1" max="10"
-                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi SKS terlebih dahulu!')"
-       oninput="this.setCustomValidity('')" >
-                </div>
+                    <input type="number" id="sks" name="sks" min="2" max="10"
+                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30">
+                    
+                    @error('sks')
+                      <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror              
+                  </div>
 
                 <div>
                     <label for="semester" class="block text-sm font-medium text-gray-300 mb-2">Semester</label>
-                    <input type="number" id="semester" name="semester" required min="1" max="8"
-                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi Semester terlebih dahulu!')"
-       oninput="this.setCustomValidity('')" >
-                </div>
+                    <input type="number" id="semester" name="semester" min="1" max="8"
+                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30">
+                
+                    @error('semester')
+                      <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror         
+                
+                  </div>
 
                 <div>
                     <label for="jenis_mk" class="block text-sm font-medium text-gray-300 mb-2">Jenis MK</label>
-                    <select id="jenis_mk" name="jenis_mk" required
-                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi Jenis MK terlebih dahulu!')"
-       oninput="this.setCustomValidity('')" >
+                    <select id="jenis_mk" name="jenis_mk"
+                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30">
                         <option value="wajib">Wajib</option>
                         <option value="pilihan">Pilihan</option>
                     </select>
@@ -101,5 +117,16 @@
             </form>
         </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('success'))
+  <script>
+      Swal.fire({
+          title: 'Berhasil!',
+          text: "{{ session('success') }}",
+          icon: 'success',
+          confirmButtonColor: '#4F46E5',
+      });
+  </script>
+  @endif
 </body>
 </html>

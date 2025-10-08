@@ -15,4 +15,17 @@ class Matakuliah extends Model
     public function kelas(){
         return $this->hasMany(Kelas::class, 'kode_mk', 'kode_mk');
     }
+    public function dosen(){
+    return $this->hasManyThrough(
+        Dosen::class, 
+        Kelas::class,  
+        'kode_mk',      
+        'nip',          
+        'kode_mk',      
+        'kode_dosen'   
+    );
+    }
+    public function getRouteKeyName(){
+        return 'kode_mk';
+    }
 }
