@@ -17,12 +17,14 @@
 
 
             <div class="flex items-center">
-            <div class="shrink-0">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="size-10 w-auto h-10" />
-            </div>
+                <div class="shrink-0">
+                    <a href="{{ route('dosen.dashboard') }}">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-auto h-10"/>
+                    </a>
+                </div>
             <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-4">
-                    <a href="#" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Dashboard</a>
+                    <a href="{{ route('dosen.dashboard') }}" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Dashboard</a>
 
                     <a href="{{ route('dosen.informasiKelas') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Informasi Kelas</a>
 
