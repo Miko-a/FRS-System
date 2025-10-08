@@ -15,4 +15,7 @@ class Mahasiswa extends Model
     public function pengambilan(){
         return $this->hasMany(Pengambilan::class, 'nrp', 'nrp');
     }
+    public function login(){
+        return $this->belongsTo(Login::class, 'login_id', 'login_id');
+    }
 }

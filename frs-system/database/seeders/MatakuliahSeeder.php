@@ -21,18 +21,19 @@ class MatakuliahSeeder extends Seeder
             ],
             [        
                 'kode_mk' => 'MK102',
-                'nama_mk' => 'Konsep Kecerdasan Artificial (A)',
+                'nama_mk' => 'Konsep Kecerdasan Artificial',
                 'sks' => 3,
                 'semester'=>3,
                 'jenis_mk'=>'wajib',
             ],
             [        
                 'kode_mk' => 'MK103',
-                'nama_mk' => 'Konsep Kecerdasan Artificial (B)',
-                'sks' => 3,
-                'semester'=>3,
+                'nama_mk' => 'Struktur Data',
+                'sks' => 4,
+                'semester'=>2,
                 'jenis_mk'=>'wajib',
             ],
+
             [        
                 'kode_mk' => 'MK104',
                 'nama_mk' => 'Data Mining',

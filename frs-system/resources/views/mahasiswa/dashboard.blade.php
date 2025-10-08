@@ -17,7 +17,9 @@
 
         <div class="flex items-center">
           <div class="shrink-0">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="size-10 w-auto h-10" />
+            <a href="{{route ('mahasiswa.dashboard') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="size-10 w-auto h-10"/>
+            </a>
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
@@ -63,7 +65,7 @@
           <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Ambil Mata Kuliah" class="w-24 h-24 mb-4">
           <h3 class="text-xl font-semibold mb-2 text-indigo-400">Ambil Mata Kuliah</h3>
           <p class="text-gray-400 mb-6 text-sm text-center">Pilih dan ambil mata kuliah yang tersedia untuk semester ini.</p>
-          <a href="{{ route('matakuliah.index') }}" 
+          <a href="{{ route('matakuliah.ambil') }}" 
              class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md transition">
              Ambil Sekarang
           </a>
