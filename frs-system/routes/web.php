@@ -30,9 +30,14 @@ Route::middleware('auth')->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard')->middleware('role:admin');
 
-    Route::get('/dosen/profile', [DosenController::class, 'show'])->name('dosen.profile');
-    Route::get('dosen/ajuanUbahJadwal', [DosenController::class, 'showAjuanUbahJadwal'])->name('dosen.ajuanUbahJadwal');
-    
+    // Khusus dosen
+    Route::middleware('role:dosen')->group(function () {
+        Route::get('/dosen/profile', [DosenController::class, 'show'])->name('dosen.profile');
+        Route::get('dosen/ajuanUbahJadwal', [DosenController::class, 'showAjuanUbahJadwal'])->name('dosen.ajuanUbahJadwal');
+        Route::get('dosen/informasiKelas', [DosenController::class, 'showInformasiKelas'])->name('dosen.informasiKelas');
+        Route::get('/dosen/kurikulum', [DosenController::class, 'showKurikulum'])->name('dosen.kurikulum');
+    });
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/matakuliah/ambil', [MatakuliahController::class, 'ambil'])->name('matakuliah.ambil')->middleware('role:mahasiswa');

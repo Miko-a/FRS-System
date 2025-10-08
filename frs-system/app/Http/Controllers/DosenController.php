@@ -18,4 +18,20 @@ class DosenController extends Controller
         $dosen = auth()->user()->Dosen;
         return view('dosen.AjuanUbahJadwal', compact('dosen'));
     }
+
+    public function showInformasiKelas() {
+        $dosen = auth()->user()->Dosen;
+        return view('dosen.informasiKelas', compact('dosen'));
+    }
+
+    // public function showKurikulum() {
+    //     $dosen = auth()->user()->Dosen;
+    //     return view('dosen.kurikulum', compact('dosen'));
+    // }
+
+    public function showKurikulum()
+    {
+        $matakuliahs = \App\Models\Matakuliah::with('prasyarat')->get();
+        return view('dosen.kurikulum', compact('matakuliahs'));
+    }
 }

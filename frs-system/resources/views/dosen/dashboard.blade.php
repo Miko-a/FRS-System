@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-900">
-<html lang="en" class="h-full bg-gray-900">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="h-full">
     
     <div class="min-h-full">
@@ -26,11 +24,11 @@
                 <div class="ml-10 flex items-baseline space-x-4">
                     <a href="#" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Dashboard</a>
 
-                    <a href="{{ route('matakuliah.index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Informasi Kelas</a>
+                    <a href="{{ route('dosen.informasiKelas') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Informasi Kelas</a>
 
                     <a href="{{ route('dosen.ajuanUbahJadwal') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Perubahan Jadwal</a>
 
-                    <a href="{{ route('matakuliah.index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Kurikulum</a>
+                    <a href="{{ route('dosen.kurikulum') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Kurikulum</a>
                 </div>
             </div>
             </div>
@@ -71,7 +69,7 @@
             <img src="{{ asset('images/academic.png') }}" alt="Lihat Mata Kuliah" class="w-24 h-24 mb-4">
             <h3 class="text-xl font-semibold mb-2 text-indigo-400">Informasi Kelas</h3>
             <p class="text-gray-400 mb-6 text-sm text-center">Dapatkan informasi lengkap mengenai kelas yang Anda ampu, termasuk daftar mahasiswa, jadwal perkuliahan, dan detail aktivitas kelas untuk mendukung proses pembelajaran yang optimal.</p>
-            <a href="{{ route('matakuliah.index') }}" 
+            <a href="{{ route('dosen.informasiKelas') }}" 
                 class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md transition">
                 Lihat Sekarang
             </a>
@@ -91,7 +89,7 @@
             <img src="{{ asset('images/research-study.png') }}" alt="Lihat Mata Kuliah" class="w-24 h-24 mb-4">
             <h3 class="text-xl font-semibold mb-2 text-indigo-400">Lihat Kurikulum</h3>
             <p class="text-gray-400 mb-6 text-sm text-center">Lihat daftar kurikulum, struktur mata kuliah, dan silabus yang tersedia untuk program studi Anda.</p>
-            <a href="{{ route('matakuliah.show', 1) }}" 
+            <a href="{{ route('dosen.kurikulum') }}" 
                 class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md transition">
                 Lihat Sekarang
             </a>
