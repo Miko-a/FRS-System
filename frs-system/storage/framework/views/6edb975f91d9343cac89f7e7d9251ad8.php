@@ -58,24 +58,17 @@
         </div>
     </header>
     <main class="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
-        <div class="flex justify-end mb-6">
-            <a href="<?php echo e(route('kelas.create')); ?>" 
-            class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md">Tambah Kelas</a>
-        </div>
-
         <div class="overflow-x-auto bg-gray-800/60 p-6 rounded-2xl shadow-xl">
             <table class="min-w-full divide-y divide-gray-700 text-gray-100">
                 <thead>
                     <tr class="bg-gray-900">
                         <th class="px-6 py-3 text-left text-sm font-medium">Mata Kuliah</th>
                         <th class="px-6 py-3 text-left text-sm font-medium">Kode Kelas</th>
-                        <th class="px-6 py-3 text-left text-sm font-medium">Dosen Pengajar</th>
                         <th class="px-6 py-3 text-left text-sm font-medium">Hari</th>
                         <th class="px-6 py-3 text-left text-sm font-medium">Jam</th>
                         <th class="px-6 py-3 text-left text-sm font-medium">Ruang</th>
                         <th class="px-6 py-3 text-left text-sm font-medium">Kapasitas</th>
                         <th class="px-6 py-3 text-left text-sm font-medium">Jumlah Mahasiswa</th>
-                        <th class="px-6 py-3 text-left text-sm font-medium">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-700">
@@ -83,29 +76,22 @@
                     <tr>
                         <td class="px-6 py-4"><?php echo e($k->matakuliah->nama_mk ?? '-'); ?></td>
                         <td class="px-6 py-4"><?php echo e($k->kode_kelas); ?></td>
-                        <td class="px-6 py-4"><?php echo e($k->dosen->nama ?? '-'); ?></td>
                         <td class="px-6 py-4"><?php echo e($k->hari); ?></td>
                         <td class="px-6 py-4"><?php echo e($k->jam_mulai); ?> - <?php echo e($k->jam_selesai); ?></td>
                         <td class="px-6 py-4"><?php echo e($k->ruang_kelas); ?></td>
                         <td class="px-6 py-4"><?php echo e($k->kapasitas); ?></td>
                         <td class="px-6 py-4"><?php echo e($k->mahasiswa->count()); ?></td>
-                        <td class="px-6 py-4 flex gap-2">
-                            <a href="<?php echo e(route('kelas.show', $k->kelas_id)); ?>" 
-                            class="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-md text-sm">Detail</a>
-                            <a href="<?php echo e(route('kelas.edit', $k->kelas_id)); ?>" 
-                            class="px-3 py-1 bg-yellow-600 hover:bg-yellow-500 text-white rounded-md text-sm">Edit</a>
-                            <form action="<?php echo e(route('kelas.destroy', $k->kelas_id)); ?>" method="POST" class="inline">
-                                <?php echo csrf_field(); ?>
-                                <?php echo method_field('DELETE'); ?>
-                                <button type="submit" 
-                                        class="px-3 py-1 bg-red-600 hover:bg-red-500 text-white rounded-md text-sm" 
-                                        onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                            </form>
-                        </td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
+
+            <div class="mt-8 flex justify-center">
+                <a href="<?php echo e(route('dosen.dashboard')); ?>" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md text-white transition">
+                    Kembali ke Dashboard
+                </a>
+            </div>
+            
         </div>
     </main>
 </body>

@@ -57,15 +57,41 @@
         <h1 class="text-3xl font-bold tracking-tight text-white">Informasi Kelas</h1>
         </div>
     </header>
-    <main>
-        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            <!-- Replace with your content -->
-            <div class="px-4 py-6 sm:px-0">
-                <div class="h-96 rounded-lg border-4 border-dashed border-gray-200 flex items-center justify-center">
-                    <span class="text-gray-500">Konten Informasi Kelas Dosen</span>
-                </div>
+    <main class="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
+        <div class="overflow-x-auto bg-gray-800/60 p-6 rounded-2xl shadow-xl">
+            <table class="min-w-full divide-y divide-gray-700 text-gray-100">
+                <thead>
+                    <tr class="bg-gray-900">
+                        <th class="px-6 py-3 text-left text-sm font-medium">Mata Kuliah</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium">Kode Kelas</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium">Hari</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium">Jam</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium">Ruang</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium">Kapasitas</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium">Jumlah Mahasiswa</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-700">
+                    @foreach ($kelas as $k)
+                    <tr>
+                        <td class="px-6 py-4">{{ $k->matakuliah->nama_mk ?? '-' }}</td>
+                        <td class="px-6 py-4">{{ $k->kode_kelas }}</td>
+                        <td class="px-6 py-4">{{ $k->hari }}</td>
+                        <td class="px-6 py-4">{{ $k->jam_mulai }} - {{ $k->jam_selesai }}</td>
+                        <td class="px-6 py-4">{{ $k->ruang_kelas }}</td>
+                        <td class="px-6 py-4">{{ $k->kapasitas }}</td>
+                        <td class="px-6 py-4">{{ $k->mahasiswa->count() }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+            <div class="mt-8 flex justify-center">
+                <a href="{{ route('dosen.dashboard') }}" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md text-white transition">
+                    Kembali ke Dashboard
+                </a>
             </div>
-            <!-- /End replace -->
+            
         </div>
     </main>
 </body>

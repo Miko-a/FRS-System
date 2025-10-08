@@ -21,7 +21,10 @@ class DosenController extends Controller
 
     public function showInformasiKelas() {
         $dosen = auth()->user()->Dosen;
-        return view('dosen.informasiKelas', compact('dosen'));
+        $kelas = \App\Models\Kelas::with(['matakuliah', 'mahasiswa'])
+                      ->where('kode_dosen', $dosen->nip)
+                      ->get();
+        return view('dosen.informasiKelas', compact('dosen', 'kelas'));
     }
 
     // public function showKurikulum() {
