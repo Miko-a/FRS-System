@@ -16,20 +16,20 @@
 
 
             <div class="flex items-center">
-          <div class="shrink-0">
-            <a href="{{route ('dosen.dashboard') }}">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="size-10 w-auto h-10"/>
-            </a>
-          </div>
+                <div class="shrink-0">
+                    <a href="{{ route('dosen.dashboard') }}">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-auto h-10"/>
+                    </a>
+                </div>
             <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-4">
                     <a href="{{ route('dosen.dashboard') }}" aria-current="page" class="rounded-md px-3 py-2 text-sm font-medium text-white">Dashboard</a>
 
-                    <a href="{{ route('matkul.index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Informasi Kelas</a>
+                    <a href="{{ route('dosen.informasiKelas') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Informasi Kelas</a>
 
-                    <a href="#" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Perubahan Jadwal</a>
+                    <a href="{{ route('dosen.ajuanUbahJadwal') }} " aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Perubahan Jadwal</a>
 
-                    <a href="{{ route('matkul.index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Kurikulum</a>
+                    <a href="{{ route('dosen.kurikulum') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Kurikulum</a>
                 </div>
             </div>
             </div>
@@ -74,6 +74,13 @@
 
                 <br>
 
+                <div>
+                    <label for="kelas" class="block text-gray-300 font-semibold mb-1">Kelas</label>
+                    <input type="text" id="kelas" name="kelas" required
+                        class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <br>
 
 
                 <div>
