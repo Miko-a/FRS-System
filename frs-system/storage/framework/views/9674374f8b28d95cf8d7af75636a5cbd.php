@@ -15,13 +15,16 @@
 
         <div class="flex items-center">
           <div class="shrink-0">
-            <img src="<?php echo e(asset('images/logo.png')); ?>" alt="Logo" class="size-10 w-auto h-10" />
+            <a href="<?php echo e(route ('admin.dashboard')); ?>">
+            <img src="<?php echo e(asset('images/logo.png')); ?>" alt="Logo" class="size-10 w-auto h-10"/>
+            </a>
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
-              <a href="#" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Dashboard</a>
-              <a href="<?php echo e(route('matakuliah.index')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Ambil Mata Kuliah</a>
-               <a href="<?php echo e(route('matakuliah.index')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Mata Kuliah</a>
+            <a href="<?php echo e(route ('admin.dashboard')); ?>" aria-current="page" class="rounded-md px-3 py-2 text-sm font-medium text-white">Dashboard</a>
+            <a href="<?php echo e(route('matakuliah.index')); ?>" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Mata Kuliah</a>
+            <a href="<?php echo e(route('kelas.index')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Kelas</a>
+            <a href="<?php echo e(route('matakuliah.index')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List User</a>
             </div>
           </div>
         </div>
@@ -57,35 +60,77 @@
 
                 <div> 
                     <label for="kode_mk" class="block text-sm font-medium text-gray-300 mb-2">Kode MK</label> 
-                    <input type="text" id="kode_mk" name="kode_mk" required maxlength="5" class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30" oninvalid="this.setCustomValidity('Silakan isi Kode MK terlebih dahulu!')" oninput="this.setCustomValidity('')" > 
+                    <input type="text" id="kode_mk" name="kode_mk" maxlength="5"  
+                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30" > 
+
+                    <?php $__errorArgs = ['kode_mk'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                      <span class="text-red-500 text-sm"><?php echo e($message); ?></span>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
 
                 <div>
                     <label for="nama_mk" class="block text-sm font-medium text-gray-300 mb-2">Nama MK</label>
-                    <input type="text" id="nama_mk" name="nama_mk" required maxlength="100"
-                        class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi Nama MK terlebih dahulu!')"
-       oninput="this.setCustomValidity('')" >
+                    <input type="text" id="nama_mk" name="nama_mk" maxlength="100"
+                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30">
+
+                    <?php $__errorArgs = ['nama_mk'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                      <span class="text-red-500 text-sm"><?php echo e($message); ?></span>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
 
                 <div>
                     <label for="sks" class="block text-sm font-medium text-gray-300 mb-2">SKS</label>
-                    <input type="number" id="sks" name="sks" required min="1" max="10"
-                        class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi SKS terlebih dahulu!')"
-       oninput="this.setCustomValidity('')" >
-                </div>
+                    <input type="number" id="sks" name="sks" min="2" max="10"
+                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30">
+                    
+                    <?php $__errorArgs = ['sks'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                      <span class="text-red-500 text-sm"><?php echo e($message); ?></span>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>              
+                  </div>
 
                 <div>
                     <label for="semester" class="block text-sm font-medium text-gray-300 mb-2">Semester</label>
-                    <input type="number" id="semester" name="semester" min="1" max="8" required
-                        class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi Semester terlebih dahulu!')"
-       oninput="this.setCustomValidity('')" >
-                </div>
+                    <input type="number" id="semester" name="semester" min="1" max="8"
+                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30">
+                
+                    <?php $__errorArgs = ['semester'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                      <span class="text-red-500 text-sm"><?php echo e($message); ?></span>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>         
+                
+                  </div>
 
                 <div>
                     <label for="jenis_mk" class="block text-sm font-medium text-gray-300 mb-2">Jenis MK</label>
-                    <select id="jenis_mk" name="jenis_mk" required
-                        class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30"  oninvalid="this.setCustomValidity('Silakan isi Jenis MK terlebih dahulu!')"
-       oninput="this.setCustomValidity('')" >
+                    <select id="jenis_mk" name="jenis_mk"
+                    class="w-full rounded-md bg-gray-900 border border-gray-700 text-gray-100 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30">
                         <option value="wajib">Wajib</option>
                         <option value="pilihan">Pilihan</option>
                     </select>
@@ -100,6 +145,17 @@
             </form>
         </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <?php if(session('success')): ?>
+  <script>
+      Swal.fire({
+          title: 'Berhasil!',
+          text: "<?php echo e(session('success')); ?>",
+          icon: 'success',
+          confirmButtonColor: '#4F46E5',
+      });
+  </script>
+  <?php endif; ?>
 </body>
 </html>
 <?php /**PATH C:\Users\iss5i\Documents\FRS-System\frs-system\resources\views/matakuliah/create.blade.php ENDPATH**/ ?>

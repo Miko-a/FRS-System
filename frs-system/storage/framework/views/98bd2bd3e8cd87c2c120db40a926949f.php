@@ -17,15 +17,14 @@
 
         <div class="flex items-center">
           <div class="shrink-0">
-            <a href="<?php echo e(route ('mahasiswa.dashboard')); ?>">
+            <a href="<?php echo e(route ('dosen.dashboard')); ?>">
             <img src="<?php echo e(asset('images/logo.png')); ?>" alt="Logo" class="size-10 w-auto h-10"/>
             </a>
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <a href="#" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Dashboard</a>
-              <a href="<?php echo e(route('matakuliah.index')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Ambil Mata Kuliah</a>
-               <a href="<?php echo e(route('matakuliah.index')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Mata Kuliah</a>
+              <a href="<?php echo e(route('matakuliah.index')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Kelola Mata Kuliah</a>
             </div>
           </div>
         </div>
@@ -56,7 +55,7 @@
 
   <main>
     <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 text-white text-center">
-      <h2 class="text-5xl font-semibold mb-6">Halo, <?php echo e(Auth::user()->Mahasiswa->nama); ?>!</h2>
+      <h2 class="text-5xl font-semibold mb-6">Halo, <?php echo e(Auth::user()->Dosen->nama); ?>!</h2>
       <p class="text-gray-300 mb-10 text-lg">Selamat datang di dashboard ITS FRS. Silakan pilih menu di bawah untuk mengelola mata kuliah dan aktivitas akademik Anda.</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
@@ -65,7 +64,7 @@
           <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Ambil Mata Kuliah" class="w-24 h-24 mb-4">
           <h3 class="text-xl font-semibold mb-2 text-indigo-400">Ambil Mata Kuliah</h3>
           <p class="text-gray-400 mb-6 text-sm text-center">Pilih dan ambil mata kuliah yang tersedia untuk semester ini.</p>
-          <a href="<?php echo e(route('matakuliah.ambil')); ?>" 
+          <a href="<?php echo e(route('matakuliah.index')); ?>" 
              class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md transition">
              Ambil Sekarang
           </a>
@@ -94,7 +93,7 @@
 
         <div class="bg-gray-800/50 rounded-2xl p-8 shadow-lg flex flex-col items-center hover:shadow-green-500/30 transition">
           <img src="https://cdn-icons-png.flaticon.com/512/2942/2942077.png" alt="Lihat Mata Kuliah" class="w-24 h-24 mb-4">
-          <h3 class="text-xl font-semibold mb-2 text-green-400">Lihat Mata Kuliah</h3>
+          <h3 class="text-xl font-semibold mb-2 text-green-400">Lihat Profile</h3>
           <p class="text-gray-400 mb-6 text-sm text-center">Lihat daftar mata kuliah yang telah kamu ambil dan jadwalnya.</p>
           <a href="<?php echo e(route('matakuliah.show', 1)); ?>" 
              class="px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded-md transition">
@@ -109,4 +108,4 @@
 
 </body>
 </html>
-<?php /**PATH C:\Users\iss5i\Documents\FRS-System\frs-system\resources\views/mahasiswa/dashboard.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\iss5i\Documents\FRS-System\frs-system\resources\views/dosen/dashboard.blade.php ENDPATH**/ ?>

@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\UserController;
 
-// mengarahkan root URL ke halaman login
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login.form');
 
-// Route login
 Route::middleware('web')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -27,8 +27,19 @@ Route::middleware('auth')->group(function () {
     })->name('admin.dashboard')->middleware('role:admin');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/matakuliah/ambil', [MatakuliahController::class, 'ambil'])->name('matakuliah.ambil')->middleware('role:mahasiswa');
+
+    Route::resource('matakuliah', MatakuliahController::class);
+    
+    Route::get('/matakuliah/get/{kode_mk}', [MatakuliahController::class, 'getMatkul']);
+
+    Route::resource('kelas', KelasController::class)->parameter('kelas', 'kelas');
+
+    Route::get('/kelas/get-by-mk/{kode_mk}', [KelasController::class, 'getByMatkul']);
+
+    Route::resource('user', UserController::class);
+
 });
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::resource('matakuliah', MatakuliahController::class);

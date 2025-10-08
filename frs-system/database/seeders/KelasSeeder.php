@@ -12,7 +12,8 @@ class KelasSeeder extends Seeder
     public function run(): void
     {
        $datakelas = [
-            [        
+            [
+                'kode_kelas' => 'A',      
                 'kode_dosen' => '199012345678901237',
                 'hari' => 'Senin',
                 'jam_mulai' => '07:00:00',
@@ -22,6 +23,7 @@ class KelasSeeder extends Seeder
                 'kode_mk' => 'MK101',
             ],
             [        
+                'kode_kelas' => 'G', 
                 'kode_dosen' => '198012345678901235',
                 'hari' => 'Rabu',
                 'jam_mulai' => '10:00:00',
@@ -30,7 +32,8 @@ class KelasSeeder extends Seeder
                 'kapasitas' => 70,
                 'kode_mk' => 'MK102',
             ],
-            [        
+            [ 
+                'kode_kelas' => 'C',        
                 'kode_dosen' => '198512345678901236',
                 'hari' => 'Jumat',
                 'jam_mulai' => '09:00:00',
@@ -40,6 +43,7 @@ class KelasSeeder extends Seeder
                 'kode_mk' => 'MK103',
             ],
             [        
+                'kode_kelas' => 'B', 
                 'kode_dosen' => '197812345678901234',
                 'hari' => 'Kamis',
                 'jam_mulai' => '15:30:00',
