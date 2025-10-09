@@ -25,7 +25,7 @@
                 <div class="ml-10 flex items-baseline space-x-4">
                     <a href="{{ route('mahasiswa.dashboard') }}" aria-current="page" class="rounded-md  px-3 py-2 text-sm font-medium text-white">Dashboard</a>
 
-                    <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Ambil Mata Kuliah</a>
+                    <a href="{{ route('mahasiswa.ambil') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Ambil Mata Kuliah</a>
 
                     <a href="{{ route('mahasiswa.informasiKelas') }}" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Kelas</a>
 
@@ -69,6 +69,7 @@
                         <th class="px-6 py-3 text-left text-sm font-medium">Hari</th>
                         <th class="px-6 py-3 text-left text-sm font-medium">Jam</th>
                         <th class="px-6 py-3 text-left text-sm font-medium">Ruang</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-700">
@@ -79,6 +80,15 @@
                         <td class="px-6 py-4">{{ $k->hari }}</td>
                         <td class="px-6 py-4">{{ $k->jam_mulai }} - {{ $k->jam_selesai }}</td>
                         <td class="px-6 py-4">{{ $k->ruang_kelas }}</td>
+                        <td class="px-6 py-4">
+                            <form action="{{ route('mahasiswa.dropMatkul') }}" method="POST" class="drop-form">
+                                @csrf
+                                <input type="hidden" name="kelas_id" value="{{ $k->kelas_id }}">
+                                <button type="submit" class="px-3 py-1 bg-red-600 hover:bg-red-500 text-white rounded-md text-sm center">
+                                    Drop
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -92,5 +102,42 @@
             
         </div>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.querySelectorAll('.drop-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Yakin ingin drop mata kuliah ini?',
+                    text: "Tindakan ini tidak dapat dibatalkan.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, Drop!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+
+    @if (session('success'))
+    <script>
+    Swal.fire({
+        title: "Berhasil!",
+        text: "{{ session('success') }}",
+        icon: "success",
+        confirmButtonColor: "#4F46E5",
+    });
+    </script>
+    @endif
+
+
 </body>
 </html>
