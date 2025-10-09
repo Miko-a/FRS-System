@@ -15,6 +15,7 @@ class Matakuliah extends Model
     public function kelas(){
         return $this->hasMany(Kelas::class, 'kode_mk', 'kode_mk');
     }
+
     public function dosen(){
     return $this->hasManyThrough(
         Dosen::class, 
@@ -25,7 +26,26 @@ class Matakuliah extends Model
         'kode_dosen'   
     );
     }
+
     public function getRouteKeyName(){
         return 'kode_mk';
+    }
+
+    public function prasyarat() {
+        return $this->belongsToMany(
+            Matakuliah::class,
+            'matakuliah_prasyarat',
+            'matakuliah_kode',
+            'prasyarat_kode',
+        );
+    }
+
+    public function dipersyaratkanOleh() {
+        return $this->belongsToMany(
+            Matakuliah::class,
+            'matakuliah_prasyarat',
+            'matakuliah_kode',
+            'prasyarat_kode',
+        );
     }
 }

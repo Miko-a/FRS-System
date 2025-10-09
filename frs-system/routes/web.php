@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DosenController;
+
+// Root URL ke halaman login
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\UserController;
 
@@ -13,6 +16,7 @@ Route::middleware('web')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 });
 
+// Route yang membutuhkan autentikasi
 Route::middleware('auth')->group(function () {
     Route::get('/mahasiswa/dashboard', function () {
         return view('mahasiswa.dashboard');
@@ -25,6 +29,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard')->middleware('role:admin');
+
+    // Khusus dosen
+    Route::middleware('role:dosen')->group(function () {
+        Route::get('/dosen/profile', [DosenController::class, 'show'])->name('dosen.profile');
+        Route::get('dosen/ajuanUbahJadwal', [DosenController::class, 'showAjuanUbahJadwal'])->name('dosen.ajuanUbahJadwal');
+        Route::get('dosen/informasiKelas', [DosenController::class, 'showInformasiKelas'])->name('dosen.informasiKelas');
+        Route::get('/dosen/kurikulum', [DosenController::class, 'showKurikulum'])->name('dosen.kurikulum');
+    });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -42,4 +54,6 @@ Route::middleware('auth')->group(function () {
 
 });
 
+// Resource matakuliah
+Route::resource('matakuliah', MatakuliahController::class);
 

@@ -1,0 +1,13 @@
+*.php linguist-language=PHP
+*.blade.php linguist-language=Blade
+*.js linguist-language=JavaScript
+*.css linguist-language=CSS
+*.scss linguist-language=SCSS
+*.sass linguist-language=Sass
+*.html linguist-language=HTML
+*.json linguist-language=JSON
+/vendor/* linguist-vendored
+/node_modules/* linguist-vendored
+/public/build/* linguist-vendored
+/public/js/* linguist-vendored
+/public/css/* linguist-vendored
