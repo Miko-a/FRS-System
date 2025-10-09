@@ -31,6 +31,33 @@ Route::middleware('auth')->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard')->middleware('role:admin');
 
+
+    //Khusus admin
+
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/admin/mataKuliah', [MatakuliahController::class, 'index'])->name('matakuliah.index');
+        Route::get('/admin/mataKuliah/create', [MatakuliahController::class, 'create'])->name('matakuliah.create');
+        Route::get('/admin/mataKuliah/edit/{id}', [MatakuliahController::class, 'edit'])->name('matakuliah.edit');
+        Route::get('/admin/mataKuliah/detail/{id}', [MatakuliahController::class, 'show'])->name('matakuliah.show');
+
+        Route::get('/admin/kelas', [KelasController::class, 'index'])->name('kelas.index');
+        Route::get('/admin/kelas/create', [KelasController::class, 'create'])->name('kelas.create');
+        Route::get('/admin/kelas/edit/{id}', [KelasController::class, 'edit'])->name('kelas.edit');
+        Route::get('/admin/kelas/detail/{id}', [KelasController::class, 'show'])->name('kelas.show');
+
+        Route::get('/admin/listUser', [UserController::class, 'index'])->name('user.index');
+
+        Route::get('/admin/listUser/createAkun', [UserController::class, 'createAkun'])->name('user.createAkun');
+        Route::post('/admin/listUser/storeAkun', [UserController::class, 'storeAkun'])->name('user.storeAkun');
+
+        Route::get('/admin/listUser/createBiodata/{role}', [UserController::class, 'createBiodata'])->name('user.createBiodata');
+        Route::post('/admin/listUser/storeBiodata/{role}', [UserController::class, 'storeBiodata'])->name('user.storeBiodata');
+
+        Route::get('/admin/listUser/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+
+        Route::get('/admin/listUser/data/{id}', [UserController::class, 'show'])->name('user.show');
+    });
+
     // Khusus dosen
     Route::middleware('role:dosen')->group(function () {
         Route::get('/dosen/profile', [DosenController::class, 'show'])->name('dosen.profile');
@@ -52,13 +79,12 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('matakuliah', MatakuliahController::class);
+    Route::resource('user', UserController::class);
     
     Route::get('/matakuliah/get/{kode_mk}', [MatakuliahController::class, 'getMatkul']);
 
     Route::resource('kelas', KelasController::class)->parameter('kelas', 'kelas');
 
     Route::get('/kelas/get-by-mk/{kode_mk}', [KelasController::class, 'getByMatkul']);
-
-    Route::resource('user', UserController::class)->middleware('role:admin');
     
 });

@@ -23,7 +23,7 @@
                 </div>
             <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-4">
-              <a href="<?php echo e(route('mahasiswa.dashboard')); ?>" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Dashboard</a>
+              <a href="<?php echo e(route('mahasiswa.dashboard')); ?>" aria-current="page" class="rounded-md px-3 py-2 text-sm font-medium text-white">Dashboard</a>
 
               <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Ambil Mata Kuliah</a>
 

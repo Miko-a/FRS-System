@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\login;
+use App\Models\Login;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
 
@@ -37,59 +37,100 @@ class UserController extends Controller
         return view('user.index', compact('users'));
     }
 
-    public function create(){
-        $dosen = Dosen::doesntHave('login')->get();
-        $mahasiswa = Mahasiswa::doesntHave('login')->get();
-        return view('user.create', compact('dosen', 'mahasiswa'));
+    public function createAkun() {
+        return view('user.createAkun');
     }
 
-    public function store(Request $request)
-    {
+    public function storeAkun(Request $request){
         $validated = $request->validate([
-            'login_id' => 'required',
             'role' => 'required|in:dosen,mahasiswa',
-            'email' => 'required|email|unique:login,email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
-            'role' => 'required|in:admin,dosen,mahasiswa'
         ]);
 
-        $login = new Login();
-        $login->email = $validated['email'];
-        $login->password = bcrypt($validated['password']);
-        $login->role = $validated['role'];
-        $login->save();
+        $login = \App\Models\Login::create([
+        'email' => $validated['email'],
+        'password' => bcrypt($validated['password']),
+        'role' => $validated['role'],
+        ]);
 
+        session(['login_id' => $login->login_id,
+        'role' => $validated['role']]);
 
-        if($validated['tipe'] === 'dosen'){
-        $dosen = Dosen::findOrFail($validated['loginable_id']);
-        $dosen->login_id = $login->login_id;
-        $dosen->save();
-         } else {
-        $mahasiswa = Mahasiswa::findOrFail($validated['loginable_id']);
-        $mahasiswa->login_id = $login->login_id;
-        $mahasiswa->save();
+        return redirect()->route('user.createBiodata', ['role' => $validated['role']]);
+    }
+
+    public function createBiodata($role){
+        $login_id = session('login_id');
+        if (!$login_id) {
+            return redirect()->route('user.createAkun')->with('error', 'Lengkapi data akun terlebih dahulu.');
         }
+
+        return view('user.createBiodata', compact('role'));
+    }
+
+    public function storeBiodata(Request $request, $role){
+        $login_id = session('login_id');
+        $role = session('role');
+
+        if (!$login_id || !$role) {
+            return redirect()->route('user.createAkun')->with('error', 'Lengkapi data akun terlebih dahulu.');
+        }
+
+        if ($role === 'dosen') {
+            $validated = $request->validate([
+                'nip' => 'required|unique:dosen,nip',
+                'nama' => 'required|string',
+                'program_studi' => 'required|string',
+            ]);
+
+            $validated['login_id'] = $login_id;
+
+            Dosen::create($validated);
+        } elseif ($role === 'mahasiswa') {
+            $validated = $request->validate([
+                'nrp' => 'required|unique:mahasiswa,nrp',
+                'nama' => 'required|string',
+                'angkatan' => 'required|integer',
+                'program_studi' => 'required|string',
+                'semester' => 'required|integer',
+                'ipk' => 'required|numeric|between:0,4.00',
+            ]);
+
+            $validated['login_id'] = $login_id;
+
+            $mhsbaru = new \App\Models\Mahasiswa($validated);
+
+            $validated['max_sks'] = $mhsbaru->getMaxSKS();
+            $validated['sks_yg_diambil'] = 0;
+
+            Mahasiswa::create($validated);
+
+        } else {
+            return redirect()->route('user.createAkun')->with('error', 'Role tidak valid.');
+        }
+
+        session()->forget(['login_id', 'role']);
+
         return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan.');
     }
 
-    public function edit(string $login_id)
-    {
-    $user = Login::where('login_id', $login_id)->firstOrFail();
+  
+    public function edit(string $login_id){
+        $user = Login::where('login_id', $login_id)->firstOrFail();
 
-    if($user->role === 'dosen' && $user->dosen){
-        $namaLengkap = $user->dosen->nama;
-        $role = 'dosen';
+        if($user->role === 'dosen'){
+            $dosen = Dosen::where('login_id', $login_id)->first();
+            return view('user.edit', compact('user', 'dosen'));
+        }
+        else if ($user->role === 'mahasiswa'){
+            $mahasiswa = Mahasiswa::where('login_id', $login_id)->first();
+            return view('user.edit', compact('user', 'mahasiswa'));
+            
+        }
+        return view('user.edit', compact('user'));
     }
-    else if ($user->role === 'mahasiswa' && $user->mahasiswa){
-        $namaLengkap = $user->mahasiswa->nama;
-        $role = 'mahasiswa';
-    }
-    else{
-        $namaLengkap = '-';
-        $role = null;
-    }
-    return view('user.edit', compact('user', 'namaLengkap', 'role'));
-    }
+
     public function update(Request $request, string $id)
     {
         $user = Login::findOrFail($id);
@@ -97,11 +138,9 @@ class UserController extends Controller
         $validated = $request->validate([
         'email' => 'required|email|unique:login,email,'.$user->login_id.',login_id',
         'password' => 'nullable|min:6|confirmed',
-        'role' => 'required|in:admin,dosen,mahasiswa'
         ]);
 
-        $user->email = $validated['email'];
-        $user->role = $validated['role'];
+        $user->email = $validated['email'];     
         
         if(!empty($validated['password'])){
             $user->password = bcrypt($validated['password']);
@@ -109,6 +148,18 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('user.index')->with('success', 'User berhasil diperbarui');
+    }
+
+    public function show(string $id){
+        $user = Login::where('login_id', $id)->findOrFail($id);
+        if($user->role === 'dosen'){
+         $dosen = Dosen::where('login_id', $id)->first();
+        return view('user.show', compact('user', 'dosen'));
+         }
+        else if ($user->role === 'mahasiswa'){
+        $mahasiswa = Mahasiswa::where('login_id', $id)->first();
+        return view('user.show', compact('user', 'mahasiswa'));
+        }
     }
 
     public function destroy(string $id)

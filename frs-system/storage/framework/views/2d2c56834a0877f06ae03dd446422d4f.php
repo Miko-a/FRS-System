@@ -52,7 +52,7 @@
 
 <main class="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
     <div class="flex justify-end mb-6">
-        <a href="<?php echo e(route('user.create')); ?>" 
+        <a href="<?php echo e(route('user.createAkun')); ?>" 
            class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md">Tambah User</a>
     </div>
 
@@ -73,8 +73,13 @@
                     <td class="px-6 py-4"><?php echo e($user->email); ?></td>
                     <td class="px-6 py-4"><?php echo e($user->role); ?></td>
                     <td class="px-6 py-4 flex gap-2">
+
+                        <a href="<?php echo e(route('user.show', $user->login_id)); ?>" 
+                           class="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-md text-sm">Detail</a>
+
                         <a href="<?php echo e(route('user.edit', $user->login_id)); ?>" 
                            class="px-3 py-1 bg-yellow-600 hover:bg-yellow-500 text-white rounded-md text-sm">Edit</a>
+                           
                         <form action="<?php echo e(route('user.destroy', $user->login_id)); ?>" method="POST" class="inline delete-user-form">
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('DELETE'); ?>
