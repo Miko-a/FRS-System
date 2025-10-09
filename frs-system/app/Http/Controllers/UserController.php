@@ -14,6 +14,7 @@ class UserController extends Controller
         $dosen = Dosen::with('login')->get()->map(function($d){
             return (object)[
                 'id' => $d->nip,
+                'login_id' => $d->login->login_id ?? null,
                 'nama' => $d->nama,
                 'email' => $d->login->email ?? '-',
                 'role' => $d->login->role ?? 'dosen',
@@ -23,6 +24,7 @@ class UserController extends Controller
         $mahasiswa = Mahasiswa::with('login')->get()->map(function($m){
             return (object)[
                 'id' => $m->nrp,
+                'login_id' => $m->login->login_id ?? null,
                 'nama' => $m->nama,
                 'email' => $m->login->email ?? '-',
                 'role' => $m->login->role ?? 'mahasiswa',
@@ -36,43 +38,79 @@ class UserController extends Controller
     }
 
     public function create(){
+        $dosen = Dosen::doesntHave('login')->get();
+        $mahasiswa = Mahasiswa::doesntHave('login')->get();
+        return view('user.create', compact('dosen', 'mahasiswa'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'login_id' => 'required',
+            'role' => 'required|in:dosen,mahasiswa',
+            'email' => 'required|email|unique:login,email',
+            'password' => 'required|min:6|confirmed',
+            'role' => 'required|in:admin,dosen,mahasiswa'
+        ]);
+
+        $login = new Login();
+        $login->email = $validated['email'];
+        $login->password = bcrypt($validated['password']);
+        $login->role = $validated['role'];
+        $login->save();
+
+
+        if($validated['tipe'] === 'dosen'){
+        $dosen = Dosen::findOrFail($validated['loginable_id']);
+        $dosen->login_id = $login->login_id;
+        $dosen->save();
+         } else {
+        $mahasiswa = Mahasiswa::findOrFail($validated['loginable_id']);
+        $mahasiswa->login_id = $login->login_id;
+        $mahasiswa->save();
+        }
+        return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(string $login_id)
     {
-        //
-    }
+    $user = Login::where('login_id', $login_id)->firstOrFail();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+    if($user->role === 'dosen' && $user->dosen){
+        $namaLengkap = $user->dosen->nama;
+        $role = 'dosen';
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
+    else if ($user->role === 'mahasiswa' && $user->mahasiswa){
+        $namaLengkap = $user->mahasiswa->nama;
+        $role = 'mahasiswa';
+    }
+    else{
+        $namaLengkap = '-';
+        $role = null;
+    }
+    return view('user.edit', compact('user', 'namaLengkap', 'role'));
+    }
     public function update(Request $request, string $id)
     {
-        //
+        $user = Login::findOrFail($id);
+
+        $validated = $request->validate([
+        'email' => 'required|email|unique:login,email,'.$user->login_id.',login_id',
+        'password' => 'nullable|min:6|confirmed',
+        'role' => 'required|in:admin,dosen,mahasiswa'
+        ]);
+
+        $user->email = $validated['email'];
+        $user->role = $validated['role'];
+        
+        if(!empty($validated['password'])){
+            $user->password = bcrypt($validated['password']);
+        }
+        $user->save();
+
+        return redirect()->route('user.index')->with('success', 'User berhasil diperbarui');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $user = Login::findOrFail($id);

@@ -7,6 +7,7 @@ use App\Http\Controllers\DosenController;
 
 // Root URL ke halaman login
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login.form');
@@ -38,9 +39,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/dosen/kurikulum', [DosenController::class, 'showKurikulum'])->name('dosen.kurikulum');
     });
 
+
+    // Khusus mahasiswa
+    Route::middleware('role:mahasiswa')->group(function () {
+        Route::get('/mahasiswa/profile', [MahasiswaController::class, 'show'])->name('mahasiswa.profile');
+        // Route::get('dosen/ajuanUbahJadwal', [DosenController::class, 'showAjuanUbahJadwal'])->name('dosen.ajuanUbahJadwal');
+        Route::get('mahasiswa/informasiKelas', [MahasiswaController::class, 'showInformasiKelas'])->name('mahasiswa.informasiKelas');
+        Route::get('/mahasiswa/kurikulum', [MahasiswaController::class, 'showKurikulum'])->name('mahasiswa.kurikulum');
+    });
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::get('/matakuliah/ambil', [MatakuliahController::class, 'ambil'])->name('matakuliah.ambil')->middleware('role:mahasiswa');
 
     Route::resource('matakuliah', MatakuliahController::class);
     
@@ -50,10 +59,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/kelas/get-by-mk/{kode_mk}', [KelasController::class, 'getByMatkul']);
 
-    Route::resource('user', UserController::class);
-
+    Route::resource('user', UserController::class)->middleware('role:admin');
+    
 });
-
-// Resource matakuliah
-Route::resource('matakuliah', MatakuliahController::class);
-

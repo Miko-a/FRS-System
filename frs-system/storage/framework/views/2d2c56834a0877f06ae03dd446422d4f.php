@@ -21,8 +21,8 @@
                     <div class="ml-10 flex items-baseline space-x-4">
                         <a href="<?php echo e(route ('admin.dashboard')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-white">Dashboard</a>
                         <a href="<?php echo e(route('matakuliah.index')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Mata Kuliah</a>
-                        <a href="<?php echo e(route('kelas.index')); ?>" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Kelas</a>
-                        <a href="<?php echo e(route('user.index')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List User</a>
+                        <a href="<?php echo e(route('kelas.index')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Kelas</a>
+                        <a href="<?php echo e(route('user.index')); ?>" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List User</a>
                         
                     </div>
                 </div>
@@ -46,7 +46,7 @@
 
 <header class="bg-gray-800 border-b border-gray-700">
     <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold text-white">List Kelas</h1>
+        <h1 class="text-3xl font-bold text-white">List User</h1>
     </div>
 </header>
 
@@ -73,9 +73,9 @@
                     <td class="px-6 py-4"><?php echo e($user->email); ?></td>
                     <td class="px-6 py-4"><?php echo e($user->role); ?></td>
                     <td class="px-6 py-4 flex gap-2">
-                        <a href="<?php echo e(route('user.edit', $user->id)); ?>" 
+                        <a href="<?php echo e(route('user.edit', $user->login_id)); ?>" 
                            class="px-3 py-1 bg-yellow-600 hover:bg-yellow-500 text-white rounded-md text-sm">Edit</a>
-                        <form action="<?php echo e(route('user.destroy', $user->id)); ?>" method="POST" class="inline delete-user-form">
+                        <form action="<?php echo e(route('user.destroy', $user->login_id)); ?>" method="POST" class="inline delete-user-form">
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('DELETE'); ?>
                             <button type="submit" class="px-3 py-1 bg-red-600 hover:bg-red-500 text-white rounded-md text-sm" 
@@ -103,5 +103,4 @@ Swal.fire({
 <?php endif; ?>
 
 </body>
-</html>
-<?php /**PATH C:\Users\iss5i\Documents\FRS-System\frs-system\resources\views/user/index.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\Users\iss5i\Documents\FRS-System\frs-system\resources\views/user/index.blade.php ENDPATH**/ ?>

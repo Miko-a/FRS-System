@@ -103,7 +103,7 @@
             <p class="text-gray-400 mb-6 text-sm text-center">Lihat informasi profil Anda, termasuk data pribadi, dan foto.</p>
             <a href="{{ route('dosen.profile') }}" 
                 class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md transition">
-                Ambil Sekarang
+                Lihat Sekarang
             </a>
             </div>
 

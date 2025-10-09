@@ -36,7 +36,7 @@
 
             <div class="flex items-center space-x-4">
             <div class="flex items-center space-x-2">
-                <a href="#" aria-current="page">
+                <a href="{{ route('dosen.profile') }}">
                     <img src="{{ asset('images/profile.png') }}" alt="User" class="size-9 rounded-full outline -outline-offset-1 outline-white/10" />
                     <span class="text-gray-300 text-sm">{{ Auth::user()->name }}</span>
                 </a>
