@@ -69,7 +69,7 @@
             @endforeach
           </ul>
         </div>
-      @endif>
+      @endif
 
       <div class="mb-6">
         <label class="block text-sm text-gray-300 mb-2">Cari mata kuliah atau kelas</label>
@@ -78,10 +78,11 @@
       </div>
 
       @php
-        // Pastikan $kelass dikirim dari controller: Kelas::with('matakuliah')->get()
         $grouped = isset($kelass) ? $kelass->groupBy(function($k){
           $mk = $k->matakuliah ?? null;
-          return ($mk->kode ?? 'MK-') . ' - ' . ($mk->nama ?? 'Tanpa Nama');
+          $kode = $mk->kode ?? $mk->kode_mk ?? 'MK-';
+          $nama = $mk->nama ?? $mk->nama_mk ?? 'Tanpa Nama';
+          return $kode . ' - ' . $nama;
         }) : collect();
       @endphp
 
@@ -94,8 +95,8 @@
           @foreach ($grouped as $mkKey => $kelasList)
             @php
               $mkFirst = $kelasList->first()->matakuliah ?? null;
-              $mkKode = $mkFirst->kode ?? '-';
-              $mkNama = $mkFirst->nama ?? $mkFirst;
+              $mkKode = $mkFirst->kode ?? $mkFirst->kode_mk ?? '-';
+              $mkNama = $mkFirst->nama ?? $mkFirst->nama_mk ?? 'Tanpa Nama';
               $mkSks  = $mkFirst->sks ?? null;
               $prasy  = method_exists($mkFirst, 'prasyarat') ? ($mkFirst->prasyarat ?? collect()) : collect();
             @endphp
@@ -113,7 +114,7 @@
                       <div class="text-xs text-gray-300">
                         @foreach ($prasy as $p)
                           <span class="inline-block rounded bg-gray-700/70 px-2 py-0.5 mr-1 mb-1">
-                            {{ $p->kode ?? '' }} {{ $p->nama ?? '' }}
+                            {{ $p->kode ?? $p->kode_mk ?? '' }} {{ $p->nama ?? $p->nama_mk ?? '' }}
                           </span>
                         @endforeach
                       </div>
@@ -136,7 +137,6 @@
                   <tbody class="divide-y divide-white/10">
                     @foreach ($kelasList as $kelas)
                       @php
-                        // Field mungkin berbeda, gunakan fallback aman
                         $kodeKelas = $kelas->kode_kelas ?? $kelas->kode ?? 'Kelas';
                         $hari      = $kelas->hari ?? null;
                         $jam       = $kelas->jam ?? ($kelas->waktu ?? null);

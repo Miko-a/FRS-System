@@ -69,7 +69,10 @@ Route::middleware('auth')->group(function () {
     // Khusus mahasiswa
     Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
         Route::get('/mahasiswa/profile', [MahasiswaController::class, 'show'])->name('mahasiswa.profile');
+
+        Route::get('mahasiswa/ambil', [MahasiswaController::class, 'showAmbilForm'])->name('mahasiswa.ambil.form');
         Route::post('mahasiswa/ambil', [MahasiswaController::class, 'ambilMatkul'])->name('mahasiswa.ambil');
+        
         Route::post('mahasiswa/dropMatkul', [MahasiswaController::class, 'dropMatkul'])->name('mahasiswa.dropMatkul');
         Route::get('mahasiswa/informasiKelas', [MahasiswaController::class, 'showInformasiKelas'])->name('mahasiswa.informasiKelas');
         Route::get('/mahasiswa/kurikulum', [MahasiswaController::class, 'showKurikulum'])->name('mahasiswa.kurikulum');

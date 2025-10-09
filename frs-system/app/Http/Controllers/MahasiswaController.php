@@ -14,6 +14,12 @@ class MahasiswaController extends Controller
         return view('mahasiswa.profile', compact('mahasiswa'));
     }
 
+    public function showAmbilForm()
+    {
+        $kelass = \App\Models\Kelas::with(['matakuliah', 'dosen'])->get();
+        return view('mahasiswa.ambil', compact('kelass'));
+    }
+
     public function ambilMatkul(Request $request)
     {
         $mahasiswa = auth()->user()->Mahasiswa;
