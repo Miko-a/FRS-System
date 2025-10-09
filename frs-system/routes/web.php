@@ -4,12 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DosenController;
-
-// Root URL ke halaman login
-use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\UserController;
 
+// Root URL ke halaman login
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login.form');
 
 Route::middleware('web')->group(function () {
@@ -61,20 +60,21 @@ Route::middleware('auth')->group(function () {
     // Khusus dosen
     Route::middleware('role:dosen')->group(function () {
         Route::get('/dosen/profile', [DosenController::class, 'show'])->name('dosen.profile');
-        Route::get('dosen/ajuanUbahJadwal', [DosenController::class, 'showAjuanUbahJadwal'])->name('dosen.ajuanUbahJadwal');
+        Route::get('dosen/ajuanUbahJadwal'  , [DosenController::class, 'showAjuanUbahJadwal'])->name('dosen.ajuanUbahJadwal');
         Route::get('dosen/informasiKelas', [DosenController::class, 'showInformasiKelas'])->name('dosen.informasiKelas');
         Route::get('/dosen/kurikulum', [DosenController::class, 'showKurikulum'])->name('dosen.kurikulum');
     });
 
 
     // Khusus mahasiswa
-    Route::middleware('role:mahasiswa')->group(function () {
+    Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
         Route::get('/mahasiswa/profile', [MahasiswaController::class, 'show'])->name('mahasiswa.profile');
-        // Route::get('dosen/ajuanUbahJadwal', [DosenController::class, 'showAjuanUbahJadwal'])->name('dosen.ajuanUbahJadwal');
+        Route::post('mahasiswa/ambil', [MahasiswaController::class, 'ambilMatkul'])->name('mahasiswa.ambil');
+        Route::post('mahasiswa/dropMatkul', [MahasiswaController::class, 'dropMatkul'])->name('mahasiswa.dropMatkul');
         Route::get('mahasiswa/informasiKelas', [MahasiswaController::class, 'showInformasiKelas'])->name('mahasiswa.informasiKelas');
         Route::get('/mahasiswa/kurikulum', [MahasiswaController::class, 'showKurikulum'])->name('mahasiswa.kurikulum');
     });
-
+    
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 

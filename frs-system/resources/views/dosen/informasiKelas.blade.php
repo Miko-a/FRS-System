@@ -56,7 +56,13 @@
 
     <header class="relative bg-gray-800 after:pointer-events-none after:absolute after:inset-x-0 after:inset-y-0 after:border-y after:border-white/10">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-white">Informasi Kelas</h1>
+            <div class="flex items-center justify-between">
+                <h1 class="text-3xl font-bold tracking-tight text-white">Informasi Kelas</h1>
+                <!-- kutambahin fitur buat ngajuin perubahan -->
+                <a href="{{ route('dosen.ajuanUbahJadwal') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-yellow-500 rounded-md text-white text-sm font-medium transition">
+                    Ajukan Perubahan
+                </a>
+            </div>
         </div>
     </header>
     <main class="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
