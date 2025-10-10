@@ -81,6 +81,10 @@
                     <span class="font-semibold text-gray-300">IPK:</span>
                     <span>{{ Auth::user()->Mahasiswa->ipk }}</span>
                 </div>
+                <div>
+                    <span class="font-semibold text-gray-300">SKS Maksimal:</span>
+                    <span>{{ Auth::user()->Mahasiswa->max_sks }}</span>
+                </div>
 
                 <div>
                     <span class="font-semibold text-gray-300">Semester:</span>

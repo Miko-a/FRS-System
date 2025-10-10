@@ -87,7 +87,7 @@
           <img src="https://cdn-icons-png.flaticon.com/512/2602/2602414.png" alt="Lihat Mata Kuliah" class="w-24 h-24 mb-4">
           <h3 class="text-xl font-semibold mb-2 text-indigo-400">List User</h3>
           <p class="text-gray-400 mb-6 text-sm text-center">Kelola daftar user di sini.</p>
-          <a href="<?php echo e(route('user.index', 1)); ?>" 
+          <a href="<?php echo e(route('user.index')); ?>" 
              class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md transition">
              Kelola User
           </a>

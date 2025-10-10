@@ -100,6 +100,11 @@
                 <p class="text-gray-400">IPK</p>
                 <p class="text-white font-medium">{{ $mahasiswa->ipk }}</p>
             </div>
+            
+            <div>
+                <p class="text-gray-400">SKS Maksimal</p>
+                <p class="text-white font-medium">{{ $mahasiswa->max_sks }}</p>
+            </div>
         @endif
         </div>
 
