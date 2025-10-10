@@ -72,6 +72,18 @@
         </div>
       <?php endif; ?>
 
+      <?php if($errors->has('kapasitas')): ?>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+          Swal.fire({
+              icon: 'error',
+              title: 'Kelas Penuh!',
+              text: '<?php echo e($errors->first('kapasitas')); ?>',
+              confirmButtonColor: "#4F46E5",
+          });
+      </script>
+      <?php endif; ?>
+
       <div class="mb-6">
         <label class="block text-sm text-gray-300 mb-2">Cari mata kuliah atau kelas</label>
         <input id="search" type="text" placeholder="Contoh: IF101, Algoritma, KLS-A"
@@ -79,7 +91,6 @@
       </div>
 
       <?php
-        // Pastikan $kelass dikirim dari controller: Kelas::with('matakuliah')->get()
         $grouped = isset($kelass) ? $kelass->groupBy(function($k){
           $mk = $k->matakuliah ?? null;
           $kode = $mk->kode ?? $mk->kode_mk ?? 'MK-';
@@ -133,6 +144,7 @@
                       <th class="px-3 py-2">Kode Kelas</th>
                       <th class="px-3 py-2">Jadwal</th>
                       <th class="px-3 py-2">Ruang</th>
+                      <th class="px-3 py-2">Kapasitas</th>
                       <th class="px-3 py-2">Dosen</th>
                       <th class="px-3 py-2">Aksi</th>
                     </tr>
@@ -140,11 +152,11 @@
                   <tbody class="divide-y divide-white/10">
                     <?php $__currentLoopData = $kelasList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kelas): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                       <?php
-                        // Field mungkin berbeda, gunakan fallback aman
                         $kodeKelas = $kelas->kode_kelas ?? $kelas->kode ?? 'Kelas';
                         $hari      = $kelas->hari ?? null;
-                        $jam       = $kelas->jam ?? ($kelas->waktu ?? null);
-                        $ruang     = $kelas->ruang ?? $kelas->ruangan ?? '-';
+                        $jam       = $kelas->jam_mulai . ' - ' . $kelas->jam_selesai ?? null;
+                        $kapasitas = $kelas->kapasitas ?? '-';
+                        $ruang     = $kelas->ruang_kelas ?? '-';
                         $dosen     = optional($kelas->dosen)->nama ?? '-';
                         $kelasId   = $kelas->id ?? $kelas->kelas_id ?? null;
                       ?>
@@ -162,6 +174,10 @@
                           <?php endif; ?>
                         </td>
                         <td class="px-3 py-2"><?php echo e($ruang); ?></td>
+                        <td class="px-3 py-2">
+                          <?php echo e($kelas->pengambilan->count()); ?> / <?php echo e($kapasitas); ?>
+
+                        </td>
                         <td class="px-3 py-2"><?php echo e($dosen); ?></td>
                         <td class="px-3 py-2">
                           <?php if($kelasId): ?>

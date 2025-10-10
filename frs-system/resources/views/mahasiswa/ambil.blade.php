@@ -130,6 +130,7 @@
                       <th class="px-3 py-2">Kode Kelas</th>
                       <th class="px-3 py-2">Jadwal</th>
                       <th class="px-3 py-2">Ruang</th>
+                      <th class="px-3 py-2">Kapasitas</th>
                       <th class="px-3 py-2">Dosen</th>
                       <th class="px-3 py-2">Aksi</th>
                     </tr>
@@ -139,8 +140,9 @@
                       @php
                         $kodeKelas = $kelas->kode_kelas ?? $kelas->kode ?? 'Kelas';
                         $hari      = $kelas->hari ?? null;
-                        $jam       = $kelas->jam ?? ($kelas->waktu ?? null);
-                        $ruang     = $kelas->ruang ?? $kelas->ruangan ?? '-';
+                        $jam       = $kelas->jam_mulai . ' - ' . $kelas->jam_selesai ?? null;
+                        $kapasitas = $kelas->kapasitas ?? '-';
+                        $ruang     = $kelas->ruang_kelas ?? '-';
                         $dosen     = optional($kelas->dosen)->nama ?? '-';
                         $kelasId   = $kelas->id ?? $kelas->kelas_id ?? null;
                       @endphp
@@ -156,6 +158,9 @@
                           @endif
                         </td>
                         <td class="px-3 py-2">{{ $ruang }}</td>
+                        <td class="px-3 py-2">
+                          {{ $kelas->pengambilan->count() }} / {{$kapasitas }}
+                        </td>
                         <td class="px-3 py-2">{{ $dosen }}</td>
                         <td class="px-3 py-2">
                           @if($kelasId)

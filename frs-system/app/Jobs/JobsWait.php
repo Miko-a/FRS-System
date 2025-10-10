@@ -11,6 +11,7 @@ use App\Models\Pengambilan;
 use App\Models\User;
 use App\Models\Kelas;
 use App\Notifications\KelasPenuhNotification;
+use Illuminate\Support\Facades\DB;
 
 class JobsWait implements ShouldQueue
 {
@@ -33,18 +34,18 @@ class JobsWait implements ShouldQueue
      */
     public function handle(): void
     {
-        $kelas = Kelas::find($this->kelas_id);
+        DB::transaction(function () {
+            // Lock baris kelas untuk mencegah race condition
+            $kelas = Kelas::where('kelas_id', $this->kelas_id)->lockForUpdate()->first();
 
-        if ($kelas->mahasiswa()->count() < $kelas->kapasitas) {
-            Pengambilan::firstOrCreate([
-                'nrp' => $this->nrp,
-                'kelas_id' => $this->kelas_id,
-            ]);
-        } else {
-            $user = User::where('nrp', $this->nrp)->first();
-            if ($user) {
-                $user->notify(new KelasPenuhNotification($this->kelas_id));
+            if ($kelas->pengambilan()->count() < $kelas->kapasitas) {
+                Pengambilan::firstOrCreate([
+                    'nrp' => $this->nrp,
+                    'kelas_id' => $this->kelas_id,
+                ]);
             }
-        }
+
+            
+        });
     }
 }

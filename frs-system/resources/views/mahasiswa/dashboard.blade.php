@@ -65,15 +65,6 @@
         <h2 class="text-5xl font-semibold mb-6">Halo, {{ Auth::user()->Mahasiswa->nama }}!</h2>
         <p class="text-gray-300 mb-10 text-lg">Selamat datang di dashboard ITS FRS. Silakan pilih menu di bawah untuk mengelola mata kuliah dan aktivitas akademik Anda.</p>
 
-        <!-- Notif -->
-        @if(isset($notifications))
-            @foreach($notifications as $notification)
-                <div class="bg-red-600 text-white px-4 py-2 rounded mb-4">
-                    {{ $notification->data['message'] }}
-                </div>
-            @endforeach
-        @endif
-
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
           
           <div class="bg-gray-800/50 rounded-2xl p-8 shadow-lg flex flex-col items-center hover:shadow-indigo-500/30 transition">
@@ -121,8 +112,5 @@
       </div>
     </main>
   </div>
-
-  $user->unreadNotifications->markAsRead();
-
 </body>
 </html>

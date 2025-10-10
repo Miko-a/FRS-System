@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('nrp')->references('nrp')->on('mahasiswa')->onDelete('cascade');
             $table->unsignedBigInteger('kelas_id');
             $table->foreign('kelas_id')->references('kelas_id')->on('kelas')->onDelete('cascade');
+
+            $table->unique(['nrp', 'kelas_id']);
             $table->timestamps();
         });
     }
