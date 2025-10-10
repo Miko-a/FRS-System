@@ -17,33 +17,33 @@
 
             <div class="flex items-center">
                 <div class="shrink-0">
-                    <a href="{{ route('dosen.dashboard') }}">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-auto h-10"/>
+                    <a href="<?php echo e(route('dosen.dashboard')); ?>">
+                        <img src="<?php echo e(asset('images/logo.png')); ?>" alt="Logo" class="w-auto h-10"/>
                     </a>
                 </div>
             <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-4">
-                    <a href="{{ route('dosen.dashboard') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Dashboard</a>
+                    <a href="<?php echo e(route('dosen.dashboard')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Dashboard</a>
 
-                    <a href="{{ route ('dosen.informasiKelas') }}" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Informasi Kelas</a>
+                    <a href="<?php echo e(route ('dosen.informasiKelas')); ?>" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Informasi Kelas</a>
 
-                    <a href="{{ route('dosen.ajuanUbahJadwal') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Perubahan Jadwal</a>
+                    <a href="<?php echo e(route('dosen.ajuanUbahJadwal')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Perubahan Jadwal</a>
 
-                    <a href="{{ route('dosen.kurikulum') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Kurikulum</a>
+                    <a href="<?php echo e(route('dosen.kurikulum')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Kurikulum</a>
                 </div>
             </div>
             </div>
 
             <div class="flex items-center space-x-4">
             <div class="flex items-center space-x-2">
-                <a href="{{ route('dosen.profile') }}">
-                    <img src="{{ asset('images/profile.png') }}" alt="User" class="size-9 rounded-full outline -outline-offset-1 outline-white/10" />
-                    <span class="text-gray-300 text-sm">{{ Auth::user()->name }}</span>
+                <a href="<?php echo e(route('dosen.profile')); ?>">
+                    <img src="<?php echo e(asset('images/profile.png')); ?>" alt="User" class="size-9 rounded-full outline -outline-offset-1 outline-white/10" />
+                    <span class="text-gray-300 text-sm"><?php echo e(Auth::user()->name); ?></span>
                 </a>
             </div>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                @csrf
+            <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST">
+                <?php echo csrf_field(); ?>
                 <button type="submit" 
                         class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition">
                 Logout
@@ -59,7 +59,7 @@
             <div class="flex items-center justify-between">
                 <h1 class="text-3xl font-bold tracking-tight text-white">Informasi Kelas</h1>
                 <!-- kutambahin fitur buat ngajuin perubahan -->
-                <a href="{{ route('dosen.ajuanUbahJadwal') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-yellow-500 rounded-md text-white text-sm font-medium transition">
+                <a href="<?php echo e(route('dosen.ajuanUbahJadwal')); ?>" class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-yellow-500 rounded-md text-white text-sm font-medium transition">
                     Ajukan Perubahan
                 </a>
             </div>
@@ -80,22 +80,22 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-700">
-                    @foreach ($kelas as $k)
+                    <?php $__currentLoopData = $kelas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td class="px-6 py-4">{{ $k->matakuliah->nama_mk ?? '-' }}</td>
-                        <td class="px-6 py-4">{{ $k->kode_kelas }}</td>
-                        <td class="px-6 py-4">{{ $k->hari }}</td>
-                        <td class="px-6 py-4">{{ $k->jam_mulai }} - {{ $k->jam_selesai }}</td>
-                        <td class="px-6 py-4">{{ $k->ruang_kelas }}</td>
-                        <td class="px-6 py-4">{{ $k->kapasitas }}</td>
-                        <td class="px-6 py-4">{{ $k->pengambilan->count() }}</td>
+                        <td class="px-6 py-4"><?php echo e($k->matakuliah->nama_mk ?? '-'); ?></td>
+                        <td class="px-6 py-4"><?php echo e($k->kode_kelas); ?></td>
+                        <td class="px-6 py-4"><?php echo e($k->hari); ?></td>
+                        <td class="px-6 py-4"><?php echo e($k->jam_mulai); ?> - <?php echo e($k->jam_selesai); ?></td>
+                        <td class="px-6 py-4"><?php echo e($k->ruang_kelas); ?></td>
+                        <td class="px-6 py-4"><?php echo e($k->kapasitas); ?></td>
+                        <td class="px-6 py-4"><?php echo e($k->pengambilan->count()); ?></td>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
 
             <div class="mt-8 flex justify-center">
-                <a href="{{ route('dosen.dashboard') }}" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md text-white transition">
+                <a href="<?php echo e(route('dosen.dashboard')); ?>" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md text-white transition">
                     Kembali ke Dashboard
                 </a>
             </div>
@@ -104,3 +104,4 @@
     </main>
 </body>
 </html>
+<?php /**PATH C:\Users\acer\FRS-System\frs-system\resources\views/dosen/informasiKelas.blade.php ENDPATH**/ ?>

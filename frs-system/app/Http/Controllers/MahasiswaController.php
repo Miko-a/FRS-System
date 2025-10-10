@@ -44,11 +44,12 @@ class MahasiswaController extends Controller
         if ($mahasiswa->sks_yg_diambil + $kelas_obj->matakuliah->sks > $mahasiswa->max_sks) {
             return redirect()->back()->withErrors(['limit' => 'Anda sudah mencapai batas maksimal pengambilan mata kuliah!']);
         } else {
+            JobsWait::dispatch($mahasiswa->nrp, $kelas_id);
+            
             $mahasiswa->sks_yg_diambil += $kelas_obj->matakuliah->sks;
             $mahasiswa->save();
         }
 
-        JobsWait::dispatch($mahasiswa->nrp, $kelas_id);
         return redirect()->route('mahasiswa.informasiKelas')->with('success', 'Permintaan pengambilan mata kuliah sedang diproses.');
 
         // return view('mahasiswa.ambil', compact('mahasiswa', 'matakuliahs', 'kelass'));

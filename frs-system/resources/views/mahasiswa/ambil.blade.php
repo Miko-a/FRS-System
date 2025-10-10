@@ -61,15 +61,15 @@
         </div>
       @endif
 
-      @if ($errors->any())
-        <div class="mb-4 rounded border border-red-500/50 bg-red-500/10 px-4 py-3 text-red-300">
-          <ul class="list-disc list-inside">
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-      @endif
+        @if ($errors->any())
+          <div class="mb-4 rounded border border-red-500/50 bg-red-500/10 px-4 py-3 text-red-300">
+            <ul class="list-disc list-inside">
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
 
       <div class="mb-6">
         <label class="block text-sm text-gray-300 mb-2">Cari mata kuliah atau kelas</label>
@@ -159,6 +159,7 @@
                         </td>
                         <td class="px-3 py-2">{{ $ruang }}</td>
                         <td class="px-3 py-2">
+                          <!-- jumlah anggota terdaftar / kapasitas kelas -->
                           {{ $kelas->pengambilan->count() }} / {{$kapasitas }}
                         </td>
                         <td class="px-3 py-2">{{ $dosen }}</td>
@@ -189,7 +190,7 @@
   </main>
 </div>
 
-<script>
+<!-- <script>
   const search = document.getElementById('search');
   search?.addEventListener('input', function () {
     const q = this.value.toLowerCase();
@@ -197,7 +198,7 @@
       const text = (row.querySelector('[data-search]')?.getAttribute('data-search') || row.textContent).toLowerCase();
       row.style.display = text.includes(q) ? '' : 'none';
     });
-  });
+  }); -->
 </script>
 </body>
 </html>

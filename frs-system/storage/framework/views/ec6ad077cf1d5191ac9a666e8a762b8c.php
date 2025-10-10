@@ -17,33 +17,33 @@
 
             <div class="flex items-center">
                 <div class="shrink-0">
-                    <a href="{{ route('dosen.dashboard') }}">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-auto h-10"/>
+                    <a href="<?php echo e(route('dosen.dashboard')); ?>">
+                        <img src="<?php echo e(asset('images/logo.png')); ?>" alt="Logo" class="w-auto h-10"/>
                     </a>
                 </div>
             <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-4">
-                    <a href="{{ route('dosen.dashboard') }}" aria-current="page" class="rounded-md px-3 py-2 text-sm font-medium text-white">Dashboard</a>
+                    <a href="<?php echo e(route('dosen.dashboard')); ?>" aria-current="page" class="rounded-md px-3 py-2 text-sm font-medium text-white">Dashboard</a>
 
-                    <a href="{{ route('dosen.informasiKelas') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Informasi Kelas</a>
+                    <a href="<?php echo e(route('dosen.informasiKelas')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Informasi Kelas</a>
 
-                    <a href="{{ route('dosen.ajuanUbahJadwal') }} " aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Perubahan Jadwal</a>
+                    <a href="<?php echo e(route('dosen.ajuanUbahJadwal')); ?> " aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Perubahan Jadwal</a>
 
-                    <a href="{{ route('dosen.kurikulum') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Kurikulum</a>
+                    <a href="<?php echo e(route('dosen.kurikulum')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Kurikulum</a>
                 </div>
             </div>
             </div>
 
             <div class="flex items-center space-x-4">
             <div class="flex items-center space-x-2">
-                <a href="{{ route('dosen.profile') }}">
-                    <img src="{{ asset('images/profile.png') }}" alt="User" class="size-9 rounded-full outline -outline-offset-1 outline-white/10" />
-                    <span class="text-gray-300 text-sm">{{ Auth::user()->name }}</span>
+                <a href="<?php echo e(route('dosen.profile')); ?>">
+                    <img src="<?php echo e(asset('images/profile.png')); ?>" alt="User" class="size-9 rounded-full outline -outline-offset-1 outline-white/10" />
+                    <span class="text-gray-300 text-sm"><?php echo e(Auth::user()->name); ?></span>
                 </a>
             </div>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                @csrf
+            <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST">
+                <?php echo csrf_field(); ?>
                 <button type="submit" 
                         class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition">
                 Logout
@@ -115,7 +115,7 @@
             </form>
 
             <div class="mt-8 flex justify-center">
-                <a href="{{ route('dosen.dashboard') }}" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md text-white transition">Kembali ke Dashboard</a>
+                <a href="<?php echo e(route('dosen.dashboard')); ?>" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md text-white transition">Kembali ke Dashboard</a>
             </div>
         </div>
     </div>
@@ -139,3 +139,4 @@
     </script> -->
 </body>
 </html>
+<?php /**PATH C:\Users\acer\FRS-System\frs-system\resources\views/dosen/AjuanUbahJadwal.blade.php ENDPATH**/ ?>

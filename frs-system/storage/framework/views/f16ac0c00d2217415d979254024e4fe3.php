@@ -17,26 +17,26 @@
 
             <div class="flex items-center">
                 <div class="shrink-0">
-                    <a href="<?php echo e(route('mahasiswa.dashboard')); ?>">
+                    <a href="<?php echo e(route('dosen.dashboard')); ?>">
                         <img src="<?php echo e(asset('images/logo.png')); ?>" alt="Logo" class="w-auto h-10"/>
                     </a>
                 </div>
             <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-4">
-              <a href="<?php echo e(route('mahasiswa.dashboard')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Dashboard</a>
+                    <a href="<?php echo e(route('dosen.dashboard')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Dashboard</a>
 
-              <a href="<?php echo e(route('mahasiswa.ambil')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Ambil Mata Kuliah</a>
+                    <a href="<?php echo e(route('dosen.informasiKelas')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Informasi Kelas</a>
 
-              <a href="<?php echo e(route('mahasiswa.informasiKelas')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">List Kelas</a>
+                    <a href="<?php echo e(route('dosen.ajuanUbahJadwal')); ?>" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Perubahan Jadwal</a>
 
-              <a href="<?php echo e(route('mahasiswa.kurikulum')); ?>" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Kurikulum</a>
+                    <a href="<?php echo e(route ('dosen.kurikulum')); ?>" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Kurikulum</a>
                 </div>
             </div>
             </div>
 
             <div class="flex items-center space-x-4">
             <div class="flex items-center space-x-2">
-                <a href="<?php echo e(route('mahasiswa.profile')); ?>">
+                <a href="<?php echo e(route('dosen.profile')); ?>">
                     <img src="<?php echo e(asset('images/profile.png')); ?>" alt="User" class="size-9 rounded-full outline -outline-offset-1 outline-white/10" />
                     <span class="text-gray-300 text-sm"><?php echo e(Auth::user()->name); ?></span>
                 </a>
@@ -98,4 +98,5 @@
 </main>
     </main>
 </body>
-</html><?php /**PATH C:\Users\acer\FRS-System\frs-system\resources\views/mahasiswa/kurikulum.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH C:\Users\acer\FRS-System\frs-system\resources\views/dosen/kurikulum.blade.php ENDPATH**/ ?>
